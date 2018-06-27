@@ -1,8 +1,8 @@
-# Social-Login #
+# Social-auth-express #
 
-Social-login is a utility built on top of PassportJS that makes it a lot faster to setup various social logins on your site, without having to deal with PassportJS' complicated and non-standardized API.
+Social-auth-express is a utility built on top of PassportJS that makes it a lot faster to setup various social logins on your site, without having to deal with PassportJS' complicated and non-standardized API.
 
-Social-login also pre-parse the data to return only the part you care about. It will also return the name of the unique property in the data ('id', 'ID', 'name', ...), so that you can identify the user's account easily.
+Social-auth-express also pre-parse the data to return only the part you care about. It will also return the name of the unique property in the data ('id', 'ID', 'name', ...), so that you can identify the user's account easily.
 
 You can literally setup a social login for 13 social sites in less than 10 minutes, without headache.
 
@@ -15,14 +15,13 @@ You can install the following social logins out of the box:
 *   linkedin
 *   github
 *   google
-*   amazon
 *   foursquare
 *   imgur
 *   meetup
 *   tumblr
 
 ## install ##
-`npm install social-login`
+`npm install social-auth-express`
 
 ## setup ##
 ```javascript
@@ -32,11 +31,11 @@ var app = express();
 // Setup express here...
 
 
-// Setup social-login
-var socialLoginClass = require("social-login");
+// Setup social-auth-express
+var socialAuthClass = require("social-auth-express");
 
 // Init
-var socialLogin = new socialLoginClass({
+var socialAuth = new socialAuthClass({
 	app: app,    					// ExpressJS instance
 	url: 'http://127.0.0.1:5000',	// Your root url
     onAuth: function(req, type, uniqueProperty, accessToken, refreshToken, profile, done) {
@@ -54,7 +53,7 @@ var socialLogin = new socialLoginClass({
 });
 
 // Setup the various services:
-socialLogin.use({
+socialAuth.use({
     facebook:	{
 		settings:	{
 			clientID:		"YOUR_API_KEY",
@@ -145,18 +144,6 @@ socialLogin.use({
 			fail:		'/auth/amazon/fail'
 		}
 	},
-	dropbox:	{
-		settings:	{
-			clientID: 		"YOUR_API_KEY",
-			clientSecret: 	"YOUR_API_SECRET"
-		},
-		url:	{
-			auth:		"/auth/dropbox",
-			callback: 	"/auth/dropbox/callback",
-			success:	'/',
-			fail:		'/auth/dropbox/fail'
-		}
-	},
 	foursquare:	{
 		settings:	{
 			clientID: 		"YOUR_API_KEY",
@@ -193,19 +180,6 @@ socialLogin.use({
 			fail:		'/auth/meetup/fail'
 		}
 	},
-	// http://developer.wordpress.com/docs/oauth2/
-	wordpress:	{
-		settings:	{
-			clientID: 		"YOUR_API_KEY",
-			clientSecret: 	"YOUR_API_SECRET"
-		},
-		url:	{
-			auth:		"/auth/wordpress",
-			callback: 	"/auth/wordpress/callback",
-			success:	'/',
-			fail:		'/auth/wordpress/fail'
-		}
-	},
 	tumblr:	{
 		settings:	{
 			clientID: 		"YOUR_API_KEY",
@@ -228,7 +202,7 @@ Do you need to receive the raw data returned by the Oauth login rather than the 
 Simply pass `returnRaw: true` in the setup parameters:
 
 ```
-var socialLogin    		= new socialLoginClass({
+var socialAuth    		= new socialAuthClass({
     returnRaw:  true,   // Set this to true (default: false)
 	app:	    app, 
 	url:	    'http://127.0.0.1:5000',
