@@ -34,6 +34,7 @@ var app = express();
 // Setup social-auth-express
 var socialAuthClass = require("social-auth-express");
 
+
 // Init
 var socialAuth = new socialAuthClass({
 	app: app,    					// ExpressJS instance
