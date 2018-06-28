@@ -11,6 +11,7 @@ You can install the following social logins out of the box:
 
 *   facebook
 *   twitter
+*   vkontakte
 *   instagram
 *   linkedin
 *   github
@@ -157,6 +158,22 @@ socialAuth.use({
 			fail:		'/auth/foursquare/fail'
 		}
 	},
+	vkontakte: {
+            settings: {
+                clientID: "clientID",
+                clientSecret: "clientSecret",
+                strategy: {},
+                authParameters: {
+                    scope: 'email'
+                }
+            },
+            url: {
+                auth: "/auth/vkontakte",
+                callback: "/auth/vkontakte/callback",
+                success: '/',
+                fail: '/auth/vkontakte/fail'
+            }
+    },
 	imgur:	{
 		settings:	{
 			clientID: 		"YOUR_API_KEY",
