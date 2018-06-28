@@ -74,7 +74,7 @@ var socialLoginClass = function (options) {
     // The strategy aliases
     this.map = {
         facebook: FacebookStrategy,
-        vk: VKontakteStrategy,
+        vkontakte: VKontakteStrategy,
         twitter: TwitterStrategy,
         instagram: InstagramStrategy,
         linkedin: LinkedInStrategy,
@@ -89,7 +89,7 @@ var socialLoginClass = function (options) {
 
     this.uniqueIds = {
         facebook: 'id',
-        vk: 'id',
+        vkontakte: 'id',
         twitter: 'id',
         instagram: 'id',
         linkedin: 'id',
