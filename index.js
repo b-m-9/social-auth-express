@@ -11,6 +11,7 @@ const FoursquareStrategy = require('passport-foursquare').Strategy;
 const ImgurStrategy = require('passport-imgur').Strategy;
 const MeetupStrategy = require('passport-meetup').Strategy;
 const TumblrStrategy = require('passport-tumblr').Strategy;
+const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 /* Misc */
 const toolset = require('toolset');
@@ -73,6 +74,7 @@ var socialLoginClass = function (options) {
     // The strategy aliases
     this.map = {
         facebook: FacebookStrategy,
+        vk: VKontakteStrategy,
         twitter: TwitterStrategy,
         instagram: InstagramStrategy,
         linkedin: LinkedInStrategy,
@@ -87,6 +89,7 @@ var socialLoginClass = function (options) {
 
     this.uniqueIds = {
         facebook: 'id',
+        vk: 'id',
         twitter: 'id',
         instagram: 'id',
         linkedin: 'id',
@@ -218,18 +221,14 @@ socialLoginClass.prototype.preparseProfileData = function (type, profile) {
     switch (type) {
         default:
             return data;
-            break;
         case "foursquare":
         case "tumblr":
             return data.response.user;
-            break;
         case "imgur":
         case "instagram":
             return data.data;
-            break;
         case "meetup":
             return data.results[0];
-            break;
     }
 };
 
