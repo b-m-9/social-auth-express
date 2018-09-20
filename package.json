@@ -20,7 +20,7 @@
 		"passport-facebook": "^2.1.1",
 		"passport-foursquare": "^1.0.0",
 		"passport-github": "^1.1.0",
-		"passport-google": "^0.3.0",
+		"passport-google-oauth": "^1.0.0",
 		"passport-imgur": "^0.0.3",
 		"passport-instagram": "^1.0.0",
 		"passport-linkedin": "^1.0.0",
