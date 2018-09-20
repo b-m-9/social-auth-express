@@ -60,9 +60,13 @@ socialAuth.use({
 		settings:	{
 			clientID:		"YOUR_API_KEY",
 			clientSecret: 	"YOUR_API_SECRET",
-			authParameters:	{
-				scope: 'read_stream,manage_pages'
-			}
+			strategy: {
+                            profileURL: 'https://graph.facebook.com/v2.6/me',
+                            profileFields: ['name', 'picture.width(200).height(200)', 'id', 'profileUrl', 'email',]
+                    	},
+                        authParameters: {
+                            scope: 'email,public_profile'
+                        }
 		},
 		url:	{
 			auth:		"/auth/facebook",           // The URL to use to login (<a href="/auth/facebook">Login with facebook</a>).
@@ -123,7 +127,15 @@ socialAuth.use({
 		}
 	},
 	google:	{
-		settings:	{}, // Google doesn't take any API key or API secret
+		settings: {
+                    clientID: 		"YOUR_API_KEY",
+		    clientSecret: 	"YOUR_API_SECRET",
+                    strategy: {
+                        scope: "https://www.googleapis.com/auth/plus.login",
+                    },
+                    passReqToCallback: true, // allows us to pass back the entire request to the callback
+
+                },
 		url:	{
 			auth:		"/auth/google",
 			callback: 	"/auth/google/callback",
