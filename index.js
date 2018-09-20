@@ -2,7 +2,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-const GoogleStrategy = require('passport-google').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const LinkedInStrategy = require('passport-linkedin').Strategy;
 const InstagramStrategy = require('passport-instagram').Strategy;
@@ -229,6 +229,15 @@ socialLoginClass.prototype.preparseProfileData = function (type, profile) {
             return data.data;
         case "meetup":
             return data.results[0];
+        case "google":
+            return {
+                id: data.id,
+                first_name: (data.name && data.name.givenName) ? data.name.givenName : data.displayName,
+                last_name: (data.name && data.name.familyName) ? data.name.familyName : '',
+                profile_url: data.url,
+                avatar: (data.imag && data.image.url) ? data.image.url : null,
+                email: data.email,
+            };
     }
 };
 
