@@ -14,7 +14,7 @@ const TumblrStrategy = require('passport-tumblr').Strategy;
 const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 /* Misc */
-const toolset = require('toolset');
+const toolset = console;
 const _ = require('underscore');
 
 

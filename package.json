@@ -29,7 +29,6 @@
 		"passport-tumblr": "^0.1.2",
 		"passport-twitter": "^1.0.4",
 		"passport-vkontakte": "^0.3.2",
-		"toolset": "^1.5.17",
 		"underscore": "^1.9.1"
 	},
 	"devDependencies": {},
