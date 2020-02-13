@@ -1,17 +1,17 @@
 {
 	"author": {
-		"name": "Bohdan Medvediev",
-		"email": "bogdan@medve-dev.net",
-		"url": "https://medve-dev.net/"
+		"name": "",
+		"email": "",
+		"url": ""
 	},
 	"name": "social-auth-express",
 	"description": "social-auth-express",
 	"version": "1.1.5",
-	"homepage": "https://github.com/medve-dev/social-auth-express",
+	"homepage": "https://github.com/b-m-9/social-auth-express",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/medve-dev/social-auth-express.git"
+		"url": "git://github.com/b-m-9/social-auth-express.git"
 	},
 	"main": "index.js",
 	"dependencies": {
@@ -34,6 +34,6 @@
 	"devDependencies": {},
 	"readmeFilename": "README.md",
 	"bugs": {
-		"url": "https://github.com/medve-dev/social-auth-express/issues"
+		"url": "https://github.com/b-m-9/social-auth-express/issues"
 	}
 }
