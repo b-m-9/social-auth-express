@@ -227,11 +227,11 @@ socialLoginClass.prototype.preparseProfileData = function (type, profile) {
       return data.results[0];
     case "google":
       return {
-        id: data.id,
-        first_name: (data.name && data.name.givenName) ? data.name.givenName : data.displayName,
-        last_name: (data.name && data.name.familyName) ? data.name.familyName : '',
+        id: data.sub,
+        first_name: (data.given_name) ? data.given_name : data.name || "Guest",
+        last_name: (data.family_name) ? data.family_name : "#",
         profile_url: data.url,
-        avatar: (data.imag && data.image.url) ? data.image.url : null,
+        avatar: (data.picture) ? data.picture : null,
         email: data.email,
       };
   }
