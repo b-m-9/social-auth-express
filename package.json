@@ -4,15 +4,10 @@
 		"email": "",
 		"url": ""
 	},
-	"name": "social-auth-express",
+	"name": "social-auth-express-v2",
 	"description": "social-auth-express",
 	"version": "1.1.9",
-	"homepage": "https://github.com/b-m-9/social-auth-express",
 	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/b-m-9/social-auth-express.git"
-	},
 	"main": "index.js",
 	"dependencies": {
 		"natives": "^1.1.6",
@@ -30,8 +25,5 @@
 		"passport-vkontakte": "^0.5.0"
 	},
 	"devDependencies": {},
-	"readmeFilename": "README.md",
-	"bugs": {
-		"url": "https://github.com/b-m-9/social-auth-express/issues"
-	}
+	"readmeFilename": "README.md"
 }
