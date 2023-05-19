@@ -1,7 +1,7 @@
 /* Passport Middlewares */
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
+const TwitterStrategy = require('./passport-twitter/lib').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const LinkedInStrategy = require('passport-linkedin').Strategy;
@@ -10,12 +10,11 @@ const AmazonStrategy = require('passport-amazon').Strategy;
 const FoursquareStrategy = require('passport-foursquare').Strategy;
 const ImgurStrategy = require('passport-imgur').Strategy;
 const MeetupStrategy = require('passport-meetup').Strategy;
-const TumblrStrategy = require('passport-tumblr').Strategy;
+// const TumblrStrategy = require('passport-tumblr').Strategy;
 const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 /* Misc */
 const toolset = console;
-const _ = require('underscore');
 
 
 var socialLoginClass = function (options) {
@@ -63,12 +62,12 @@ var socialLoginClass = function (options) {
         clientSecret: 'consumerSecret'
       }
     },
-    tumblr: {
-      varChanges: {
-        clientID: 'consumerKey',
-        clientSecret: 'consumerSecret'
-      }
-    }
+    // tumblr: {
+    //   varChanges: {
+    //     clientID: 'consumerKey',
+    //     clientSecret: 'consumerSecret'
+    //   }
+    // }
   };
 
   // The strategy aliases
@@ -84,7 +83,7 @@ var socialLoginClass = function (options) {
     foursquare: FoursquareStrategy,
     imgur: ImgurStrategy,
     meetup: MeetupStrategy,
-    tumblr: TumblrStrategy
+    // tumblr: TumblrStrategy
   };
 
   this.uniqueIds = {
@@ -99,7 +98,7 @@ var socialLoginClass = function (options) {
     foursquare: 'id',
     imgur: 'id',
     meetup: 'id',
-    tumblr: 'name'
+    // tumblr: 'name'
   };
 
   // The strategy names
@@ -181,7 +180,7 @@ socialLoginClass.prototype.setup = function (type, settings) {
   }
   // Extend the settings if needed
   if (this.specialCases[type] && this.specialCases[type].setup) {
-    passportSetup = _.extend(passportSetup, this.specialCases[type].setup);
+    passportSetup = Object.assign({}, passportSetup, this.specialCases[type].setup);
   }
 
   // Execute the passport strategy
@@ -209,7 +208,6 @@ socialLoginClass.prototype.setup = function (type, settings) {
 // The response is not uniform, making it harder to manage consistent data format accross all the services.
 //
 socialLoginClass.prototype.preparseProfileData = function (type, profile) {
-
 
 
   let data = profile._json;

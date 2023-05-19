@@ -19,7 +19,6 @@ You can install the following social logins out of the box:
 *   foursquare
 *   imgur
 *   meetup
-*   tumblr
 
 ## install ##
 `npm install social-auth-express`
