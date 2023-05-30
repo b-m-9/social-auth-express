@@ -19,6 +19,7 @@ const toolset = console;
 
 var socialLoginClass = function (options) {
   var scope = this;
+  this._basePath = options._basePath || "/";
   this.returnRaw = options.returnRaw || false;
   this.app = options.app || {};
   this.onAuth = options.onAuth || function () {
@@ -115,8 +116,8 @@ socialLoginClass.prototype.init = function () {
   let scope = this;
 
   // Setup PassportJS
-  this.app.use(passport.initialize());
-  this.app.use(passport.session());
+  this.app.use(scope._basePath, passport.initialize());
+  this.app.use(scope._basePath, passport.session());
   passport.serializeUser(function (user, done) {
     done(null, user);
   });
