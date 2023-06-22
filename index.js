@@ -118,7 +118,7 @@ socialLoginClass.prototype.init = function () {
 
   // Setup PassportJS
   this.app.use(scope._basePath, passport.initialize());
-  if (scope.disableSession)
+  if (!scope.disableSession)
     this.app.use(scope._basePath, passport.session());
   passport.serializeUser(function (user, done) {
     done(null, user);
@@ -126,7 +126,7 @@ socialLoginClass.prototype.init = function () {
   passport.deserializeUser(function (user, done) {
     done(null, user);
   });
-  if (scope.disableSession) {
+  if (!scope.disableSession) {
     this.app.get(this.logout.url, function (req, res) {
       res.clearCookie('session_key');
       req.logout();
