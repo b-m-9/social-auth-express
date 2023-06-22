@@ -205,7 +205,8 @@ socialLoginClass.prototype.setup = function (type, settings) {
   this.app.get(settings.url.callback, passport.authenticate(strategyName, {
     successRedirect: settings.url.success,
     failureRedirect: settings.url.fail,
-    failureFlash: true
+    failureFlash: true,
+    session: !scope.disableSession
   }));
 };
 
