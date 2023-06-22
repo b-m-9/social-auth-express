@@ -20,6 +20,7 @@ const toolset = console;
 var socialLoginClass = function (options) {
   var scope = this;
   this._basePath = options._basePath || "/";
+  this.disableSession = options.disableSession || false;
   this.returnRaw = options.returnRaw || false;
   this.app = options.app || {};
   this.onAuth = options.onAuth || function () {
@@ -117,19 +118,21 @@ socialLoginClass.prototype.init = function () {
 
   // Setup PassportJS
   this.app.use(scope._basePath, passport.initialize());
-  this.app.use(scope._basePath, passport.session());
+  if (scope.disableSession)
+    this.app.use(scope._basePath, passport.session());
   passport.serializeUser(function (user, done) {
     done(null, user);
   });
   passport.deserializeUser(function (user, done) {
     done(null, user);
   });
-
-  this.app.get(this.logout.url, function (req, res) {
-    res.clearCookie('session_key');
-    req.logout();
-    res.redirect(scope.logout.after);
-  });
+  if (scope.disableSession) {
+    this.app.get(this.logout.url, function (req, res) {
+      res.clearCookie('session_key');
+      req.logout();
+      res.redirect(scope.logout.after);
+    });
+  }
 
   let type;
   for (type in this.settings) {
