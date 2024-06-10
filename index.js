@@ -10,8 +10,9 @@ const AmazonStrategy = require('passport-amazon').Strategy;
 const FoursquareStrategy = require('passport-foursquare').Strategy;
 const ImgurStrategy = require('passport-imgur').Strategy;
 const MeetupStrategy = require('passport-meetup').Strategy;
+const AppleStrategy = require('passport-apple').Strategy;
 // const TumblrStrategy = require('passport-tumblr').Strategy;
-const VKontakteStrategy = require('passport-vkontakte').Strategy;
+// const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
 /* Misc */
 const toolset = console;
@@ -41,6 +42,19 @@ var socialLoginClass = function (options) {
         clientID: 'consumerKey',
         clientSecret: 'consumerSecret'
       }
+    },
+    apple: {
+      varAdd: {
+        teamID: (settings) => {
+          console.log('social auth apple teamID',settings)
+        },
+        keyID: (settings) => {
+          console.log('social auth apple teamID',settings)
+        },
+        privateKeyString: (settings) => {
+          console.log('social auth apple privateKeyString',settings)
+        },
+      },
     },
     linkedin: {
       varChanges: {
@@ -75,7 +89,7 @@ var socialLoginClass = function (options) {
   // The strategy aliases
   this.map = {
     facebook: FacebookStrategy,
-    vkontakte: VKontakteStrategy,
+    // vkontakte: VKontakteStrategy,
     twitter: TwitterStrategy,
     instagram: InstagramStrategy,
     linkedin: LinkedInStrategy,
@@ -85,12 +99,14 @@ var socialLoginClass = function (options) {
     foursquare: FoursquareStrategy,
     imgur: ImgurStrategy,
     meetup: MeetupStrategy,
+    apple: AppleStrategy,
     // tumblr: TumblrStrategy
   };
 
   this.uniqueIds = {
     facebook: 'id',
-    vkontakte: 'id',
+    // vkontakte: 'id',
+    apple: 'id',
     twitter: 'id',
     instagram: 'id',
     linkedin: 'id',
@@ -154,6 +170,7 @@ socialLoginClass.prototype.setup = function (type, settings) {
     clientSecret: settings.settings.clientSecret,
     callbackURL: this.url + settings.url.callback,
     passReqToCallback: true
+
 
   };
   // Update the variable names if needed, because Passport is unable to standardize things apparently.
