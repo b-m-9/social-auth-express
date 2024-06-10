@@ -44,17 +44,9 @@ var socialLoginClass = function (options) {
       }
     },
     apple: {
-      varAdd: {
-        teamID: (settings) => {
-          console.log('social auth apple teamID',settings)
-        },
-        keyID: (settings) => {
-          console.log('social auth apple teamID',settings)
-        },
-        privateKeyString: (settings) => {
-          console.log('social auth apple privateKeyString',settings)
-        },
-      },
+      varChanges: {
+        clientSecret: "privateKeyString"
+      }
     },
     linkedin: {
       varChanges: {
