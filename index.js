@@ -198,8 +198,8 @@ socialLoginClass.prototype.setup = function (type, settings) {
 
   // Execute the passport strategy
   //passport.use(new (this.map[type])(passportSetup, settings.methods.auth));
-  passport.use(new (this.map[type])(passportSetup, function (req, accessToken, refreshToken, profile, done) {
-    if(type === 'apple') profile._json = jwt.decode(refreshToken);
+  passport.use(new (this.map[type])(passportSetup, function (req, accessToken, refreshToken, idToken, profile, done) {
+    if(type === 'apple') profile._json = jwt.decode(idToken);
     scope.onAuth(req, type, scope.uniqueIds[type], accessToken, refreshToken, scope.returnRaw ? profile : scope.preparseProfileData(type, profile), done);
   }));
 
@@ -236,7 +236,7 @@ socialLoginClass.prototype.preparseProfileData = function (type, profile) {
       return {
         id: data.sub,
         first_name: capitalizeFirstLetter(String(data.email).split("@")[0]),
-        last_name: "",
+        last_name: "#",
         profile_url: "",
         avatar: null,
         email: data.email,
