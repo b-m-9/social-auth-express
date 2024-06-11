@@ -11,6 +11,7 @@ const FoursquareStrategy = require('passport-foursquare').Strategy;
 const ImgurStrategy = require('passport-imgur').Strategy;
 const MeetupStrategy = require('passport-meetup').Strategy;
 const AppleStrategy = require('passport-apple').Strategy;
+const jwt = require('jsonwebtoken');
 // const TumblrStrategy = require('passport-tumblr').Strategy;
 // const VKontakteStrategy = require('passport-vkontakte').Strategy;
 
@@ -97,7 +98,6 @@ var socialLoginClass = function (options) {
 
   this.uniqueIds = {
     facebook: 'id',
-    // vkontakte: 'id',
     apple: 'id',
     twitter: 'id',
     instagram: 'id',
@@ -199,6 +199,7 @@ socialLoginClass.prototype.setup = function (type, settings) {
   // Execute the passport strategy
   //passport.use(new (this.map[type])(passportSetup, settings.methods.auth));
   passport.use(new (this.map[type])(passportSetup, function (req, accessToken, refreshToken, profile, done) {
+    if(type === 'apple') profile._json = jwt.decode(refreshToken);
     scope.onAuth(req, type, scope.uniqueIds[type], accessToken, refreshToken, scope.returnRaw ? profile : scope.preparseProfileData(type, profile), done);
   }));
 
@@ -211,14 +212,16 @@ socialLoginClass.prototype.setup = function (type, settings) {
   this.app.get(settings.url.auth, passport.authenticate(strategyName, settings.settings.authParameters || {}));
 
   // Setup the callback url (/auth/:service/callback)
-  this.app.get(settings.url.callback, passport.authenticate(strategyName, {
+  this.app.all(settings.url.callback, passport.authenticate(strategyName, {
     successRedirect: settings.url.success,
     failureRedirect: settings.url.fail,
     failureFlash: true,
     session: !scope.disableSession
   }));
 };
-
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // The response is not uniform, making it harder to manage consistent data format accross all the services.
 //
 socialLoginClass.prototype.preparseProfileData = function (type, profile) {
@@ -229,6 +232,15 @@ socialLoginClass.prototype.preparseProfileData = function (type, profile) {
   switch (type) {
     default:
       return data;
+    case "apple":
+      return {
+        id: data.sub,
+        first_name: capitalizeFirstLetter(String(data.email).split("@")[0]),
+        last_name: "",
+        profile_url: "",
+        avatar: null,
+        email: data.email,
+      }
     case "foursquare":
     case "tumblr":
       return data.response.user;
