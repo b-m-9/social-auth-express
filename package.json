@@ -6,7 +6,7 @@
 	},
 	"name": "social-auth-express-v2",
 	"description": "social-auth-express",
-	"version": "2.0.8",
+	"version": "2.0.9",
 	"license": "MIT",
 	"main": "index.js",
 	"dependencies": {
